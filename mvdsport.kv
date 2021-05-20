@@ -1,0 +1,41 @@
+<Container>:
+
+    orientation: 'vertical'
+
+    AccordionItem:
+        title: 'Статус'
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Выберите Ваш статус'
+                size_hint_y: 0.3
+
+
+            BoxLayout:
+                orientation: 'horizontal'
+                padding: 50
+                spacing: 10
+
+
+                ToggleButton:
+                    size_hint: 0.8, 0.3
+                    height: '48dp'
+                    text: 'Стажер'
+                    group: 'g1'
+                    background_color: .5,.5,1,1
+
+                ToggleButton:
+                    size_hint: 0.8, 0.3
+                    height: '48dp'
+                    text: 'Сотрудник'
+                    group: 'g1'
+                    background_color: .5,.5,1,1
+
+
+
+    AccordionItem:
+        title: 'Panel 2'
+        Button:
+            text: 'A button, what else?'
+
