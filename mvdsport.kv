@@ -1,14 +1,44 @@
+<TogButMy@ToggleButton>:
+    size_hint: 0.8, 0.3
+    height: '48dp'
+    group: 'g1'
+    background_color: .5,.5,1,1
+
+
 <Container>:
 
     orientation: 'vertical'
 
     AccordionItem:
         title: 'Статус'
+
         BoxLayout:
             orientation: 'vertical'
 
             Label:
                 text: 'Выберите Ваш статус'
+                size_hint_y: 0.3
+
+            BoxLayout:
+                orientation: 'horizontal'
+                padding: 50
+                spacing: 10
+
+                TogButMy:
+                    text: 'Стажер'
+
+                TogButMy:
+                    text: 'Сотрудник'
+
+
+    AccordionItem:
+        title: 'Пол'
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Выберите Ваш пол'
                 size_hint_y: 0.3
 
 
@@ -17,25 +47,62 @@
                 padding: 50
                 spacing: 10
 
+                TogButMy:
+                    text: 'Мужчина'
 
-                ToggleButton:
-                    size_hint: 0.8, 0.3
-                    height: '48dp'
-                    text: 'Стажер'
-                    group: 'g1'
-                    background_color: .5,.5,1,1
+                TogButMy:
+                    text: 'Женщина'
 
-                ToggleButton:
-                    size_hint: 0.8, 0.3
-                    height: '48dp'
-                    text: 'Сотрудник'
-                    group: 'g1'
-                    background_color: .5,.5,1,1
+    AccordionItem:
+        title: 'Возраст'
 
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Укажите сколько Вам лет'
+                size_hint_y: 0.3
+
+            TextInput:
 
 
     AccordionItem:
-        title: 'Panel 2'
-        Button:
-            text: 'A button, what else?'
+        title: 'Упражнения'
 
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Укажите Ваши результаты в упражнениях'
+                size_hint_y: 0.3
+
+
+            BoxLayout:
+                column: 2
+                orientation: 'horizontal'
+                padding: 50
+                spacing: 10
+
+                Label:
+                    text: 'Бег'
+
+                TextInput:
+
+                Label:
+                    text: 'Отжимания'
+
+                TextInput:
+
+    AccordionItem:
+        title: 'Результат'
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            Label:
+                text: 'Вы набрали 100 баллов'
+                size_hint_y: 0.3
+
+            Label:
+                text: 'Вым еще необходимо отжатся 50 раз или подтянутся 15 раз'
+                size_hint_y: 0.3
