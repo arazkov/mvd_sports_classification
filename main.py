@@ -2,7 +2,7 @@ from kivy.uix.accordion import Accordion, AccordionItem
 from kivy.app import App
 from kivy.core.window import Window
 
-#Window.size = (480, 853)
+Window.size = (480, 853)
 
 class Container(Accordion):
     pass

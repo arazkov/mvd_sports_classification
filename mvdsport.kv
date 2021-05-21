@@ -63,7 +63,11 @@
                 text: 'Укажите сколько Вам лет'
                 size_hint_y: 0.3
 
-            TextInput:
+            Spinner:
+                text: "Упражнение"
+                values: "Бег", "Отжимания", "Подтягивания", "Гиря"
+                size_hint: (None, None)
+                size: (110, 40)
 
 
     AccordionItem:
@@ -77,22 +81,24 @@
                 size_hint_y: 0.3
 
 
-            BoxLayout:
-                column: 2
-                orientation: 'horizontal'
-                padding: 50
-                spacing: 10
+            GridLayout:
+                cols: 2
+                #orientation: 'vertical'
+                padding: 100
+                spacing: 50
 
-                Label:
-                    text: 'Бег'
-
-                TextInput:
-
-                Label:
-                    text: 'Отжимания'
+                Spinner:
+                    text: "Упражнение"
+                    values: "Бег", "Отжимания", "Подтягивания", "Гиря"
+                    size_hint: (None, None)
+                    size: (110, 40)
 
                 TextInput:
+                    size_hint: (None, None)
+                    size: (100, 40)
+                    font_size: 30
 
+                
     AccordionItem:
         title: 'Результат'
 
@@ -100,8 +106,10 @@
             orientation: 'vertical'
 
             Label:
-                text: 'Вы набрали 100 баллов'
-                size_hint_y: 0.3
+                font_size: '28sp'
+                text: "Вы набрали\n [color=ff3333]       100\n[/color] [color=3333ff][/color]    баллов"
+                markup: True
+                size_hint_y: 0.1
 
             Label:
                 text: 'Вым еще необходимо отжатся 50 раз или подтянутся 15 раз'
