@@ -58,16 +58,18 @@
 
         BoxLayout:
             orientation: 'vertical'
+            padding: 150
+            spacing: 100
 
             Label:
                 text: 'Укажите сколько Вам лет'
                 size_hint_y: 0.3
 
             Spinner:
-                text: "Упражнение"
-                values: "Бег", "Отжимания", "Подтягивания", "Гиря"
-                size_hint: (None, None)
-                size: (110, 40)
+                text: "Возраст"
+                values: "Меньше 18", "От 18 до 24", "От 25 до 29", "От 30 до 34", "От 35 до 39", "От 40 до 44", "Больше 45"
+                #size_hint: 0.5, 0.1
+                #size: (110, 40)
 
 
     AccordionItem:
@@ -112,5 +114,7 @@
                 size_hint_y: 0.1
 
             Label:
-                text: 'Вым еще необходимо отжатся 50 раз или подтянутся 15 раз'
+                font_size: '28sp'
+                text: 'Вым еще необходимо:\n [color=3333ff]отжатся[color=ff3333] 50[/color][/color] раз или\n [color=3333ff]подтянутся [color=ff3333]15 [/color][/color] раз'
+                markup: True
                 size_hint_y: 0.3
