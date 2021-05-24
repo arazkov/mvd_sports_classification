@@ -11,7 +11,7 @@ class Container(BoxLayout):
 
     def qw(self, param):
         data.update(param)
-        self.rez.text = f"{data['stat'] if 'stat' in data else ''}\n{data['sex'] if 'sex' in data else ''}\n{data['age'] if 'age' in data else ''}\n{data['exersize'] if 'exersize' in data else ''}"
+        self.rez.text = f"{data['stat'] if 'stat' in data else ''}\n{data['sex'] if 'sex' in data else ''}\n{data['age'] if 'age' in data else ''}\n{data['exersize'] if 'exersize' in data else ''}\n{self.rezult_input.text if self.rezult_input.text else ''}"
 
 class MvdSportApp(App):
     def build(self):

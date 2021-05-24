@@ -5,6 +5,7 @@
     spacing: 10
 
     rez: rez
+    rezult_input: rezult_input
 
     Label:
         font_size: '38sp'
@@ -97,7 +98,11 @@
                 root.qw({'exersize': self.exersize})
 
         TextInput:
+            id: rezult_input
             font_size: 30
+            multiline: False
+            input_type: 'number'
+            input_filter: 'int'
 
     Label:
         font_size: '28sp'
