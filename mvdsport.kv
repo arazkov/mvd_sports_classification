@@ -76,7 +76,7 @@
             on_press: print('ww')
             on_text:
                 self.age = '18-' if self.text == "Меньше 18" else '18_24' if self.text == "От 18 до 24" else '25_29' if self.text == "От 25 до 29" else '30_34' if self.text == "От 30 до 34" else '35_39' if self.text == "От 35 до 39" else '40_44' if self.text == "От 40 до 44" else '45+' if self.text == "Больше 45" else ''
-                print("The spinner {} has text {}".format(self.age, self.text))
+                root.qw({'age': self.age})
 
 
         Label:
@@ -92,6 +92,9 @@
             values: "Бег", "Отжимания", "Подтягивания", "Гиря"
             size_hint_y: None
             size: (110, 40)
+            on_text:
+                self.exersize = 'run' if self.text == "Бег" else 'push ups' if self.text == "Отжимания" else 'pull ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else ''
+                root.qw({'exersize': self.exersize})
 
         TextInput:
             font_size: 30
