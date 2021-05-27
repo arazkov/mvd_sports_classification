@@ -91,7 +91,7 @@
             size_hint_y: None
             size: (110, 40)
             on_text:
-                self.exersize = 'run' if self.text == "Бег" else 'push ups' if self.text == "Отжимания" else 'pull ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else ''
+                self.exersize = 'run_10_10' if self.text == "Бег" else 'push_ups' if self.text == "Отжимания" else 'pull_ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else ''
                 root.qw({'exersize': self.exersize})
 
         TextInput:
@@ -103,13 +103,13 @@
                 root.qw({'rezult': self.text})
 
     Label:
+        id: rez
         font_size: '28sp'
-        text: "Вы набрали\n [color=ff3333]       100\n[/color] [color=3333ff][/color]    баллов"
+        text: "Укажите все параметры"
         markup: True
         size_hint_y: 0.3
 
     Label:
-        id: rez
         font_size: '28sp'
         text: 'Вым еще необходимо:\n [color=3333ff]отжатся[color=ff3333] 50[/color][/color] раз или\n [color=3333ff]подтянутся [color=ff3333]15 [/color][/color] раз'
         markup: True
