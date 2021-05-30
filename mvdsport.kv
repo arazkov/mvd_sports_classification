@@ -5,6 +5,7 @@
     spacing: 10
 
     rez: rez
+    exer: exer
 
     Label:
         font_size: '38sp'
@@ -86,12 +87,12 @@
             #size_hint_y: 0.3
 
         Spinner:
+            id: exer
             text: "Упражнение"
-            values: "Бег", "Отжимания", "Подтягивания", "Гиря"
             size_hint_y: None
             size: (110, 40)
             on_text:
-                self.exercise = 'run_10_10' if self.text == "Бег" else 'push_ups' if self.text == "Отжимания" else 'pull_ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else ''
+                self.exercise = 'run_10_10' if self.text == "Бег" else 'push_ups' if self.text == "Отжимания" else 'pull_ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else 'press' if self.text == "Прес" else ''
                 root.qw({'exercise': self.exercise})
 
         TextInput:
