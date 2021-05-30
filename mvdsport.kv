@@ -60,7 +60,7 @@
             height: '48dp'
             text: 'Женский'
             group: 'g2'
-            on_press: root.qw({'sex': 'famale'})
+            on_press: root.qw({'sex': 'female'})
             #on_release: print(self.sex)
 
         Label:
@@ -91,8 +91,8 @@
             size_hint_y: None
             size: (110, 40)
             on_text:
-                self.exersize = 'run_10_10' if self.text == "Бег" else 'push_ups' if self.text == "Отжимания" else 'pull_ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else ''
-                root.qw({'exersize': self.exersize})
+                self.exercise = 'run_10_10' if self.text == "Бег" else 'push_ups' if self.text == "Отжимания" else 'pull_ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else ''
+                root.qw({'exercise': self.exercise})
 
         TextInput:
             font_size: 30
@@ -100,7 +100,7 @@
             input_type: 'number'
             input_filter: 'int'
             on_text:
-                root.qw({'rezult': self.text})
+                root.qw({'result': self.text})
 
     Label:
         id: rez
