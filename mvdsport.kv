@@ -6,6 +6,7 @@
 
     rez: rez
     exer: exer
+    ti: ti
 
     Label:
         font_size: '38sp'
@@ -61,8 +62,8 @@
             height: '48dp'
             text: 'Женский'
             group: 'g2'
-            on_press: root.qw({'sex': 'female'})
-            #on_release: print(self.sex)
+            #on_press: root.qw({'sex': 'female'})
+            on_release: root.qw({'sex': 'female'})
 
         Label:
             text: 'Возраст'
@@ -96,10 +97,11 @@
                 root.qw({'exercise': self.exercise})
 
         TextInput:
+            id: ti
             font_size: 30
             multiline: False
             input_type: 'number'
-            input_filter: 'int'
+            #input_filter: 'int'
             on_text:
                 root.qw({'result': self.text})
 

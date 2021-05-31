@@ -35,7 +35,14 @@ class Container(BoxLayout):
         elif data['sex'] == 'female':
             self.exer.values = ["Бег", "Отжимания", "Прес"]
         if all([data['stat'], data['sex'], data['age'], data['exercise'], data['result']]):
-            self.rez.text = f"Вы набрали\n [color=ff3333]       {calculate_balls(data['sex'], data['exercise'], data['result'])}\n[/color] [color=3333ff][/color]    баллов"
+            try:
+                if data['exercise'] == 'run_10_10':
+                    self.ti.input_filter = 'float'
+                else:
+                    self.ti.input_filter = 'int'
+                self.rez.text = f"Вы набрали\n [color=ff3333]       {calculate_balls(data['sex'], data['exercise'], data['result'])}\n[/color] [color=3333ff][/color]    баллов"
+            except:
+                self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
 
 
 class MvdSportApp(App):
