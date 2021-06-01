@@ -5,8 +5,10 @@
     spacing: 10
 
     rez: rez
+    rez_2: rez_2
     exer: exer
     ti: ti
+    age: age
 
     Label:
         font_size: '38sp'
@@ -29,7 +31,8 @@
             height: '48dp'
             text: 'Кандидат'
             group: 'g1'
-            on_press: root.qw({'stat': 'civil'})
+            on_press:
+                root.qw({'stat': 'civil'})
             #on_release: print(self.stat)
 
 
@@ -70,12 +73,12 @@
             #size_hint_y: 0.3
 
         Spinner:
+            id: age
             text: "Возраст"
-            values: "Меньше 18", "От 18 до 24", "От 25 до 29", "От 30 до 34", "От 35 до 39", "От 40 до 44", "Больше 45"
             size_hint_y: None
             size: (110, 40)
             on_text:
-                self.age = '18-' if self.text == "Меньше 18" else '18_24' if self.text == "От 18 до 24" else '25_29' if self.text == "От 25 до 29" else '30_34' if self.text == "От 30 до 34" else '35_39' if self.text == "От 35 до 39" else '40_44' if self.text == "От 40 до 44" else '45+' if self.text == "Больше 45" else ''
+                self.age = '25-' if self.text == "до 25 лет" else '25_29' if self.text == "От 25 до 29" else '30_34' if self.text == "От 30 до 34" else '35_39' if self.text == "От 35 до 39" else '40_44' if self.text == "От 40 до 44" else '45+' if self.text == "Больше 45" else ''
                 root.qw({'age': self.age})
 
 
@@ -113,6 +116,7 @@
         size_hint_y: 0.3
 
     Label:
+        id: rez_2
         font_size: '28sp'
         text: 'Вым еще необходимо:\n [color=3333ff]отжатся[color=ff3333] 50[/color][/color] раз или\n [color=3333ff]подтянутся [color=ff3333]15 [/color][/color] раз'
         markup: True
