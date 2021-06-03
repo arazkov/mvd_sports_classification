@@ -78,7 +78,7 @@
             size_hint_y: None
             size: (110, 40)
             on_text:
-                self.age = '25-' if self.text == "до 25 лет" else '25_29' if self.text == "От 25 до 29" else '30_34' if self.text == "От 30 до 34" else '35_39' if self.text == "От 35 до 39" else '40_44' if self.text == "От 40 до 44" else '45+' if self.text == "Больше 45" else ''
+                self.age = '25-' if self.text == "до 25 лет" else '25_30' if self.text == "от 25 до 30 лет" else '30_35' if self.text == "от 30 до 35 лет" else '35_40' if self.text == "от 35 до 40 лет" else '40_45' if self.text == "от 40 до 45 лет" else '45+' if self.text == "45 лет и старше" else '45_50' if self.text == "от 45 до 50 лет" else '50_55' if self.text == "от 50 до 55 лет" else '55+' if self.text == "55 лет и старше" else ''
                 root.qw({'age': self.age})
 
 

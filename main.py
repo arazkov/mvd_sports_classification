@@ -13,18 +13,20 @@ data = {
     'result': 0
 }
 
+with open('exercises_balls.json', 'r') as js:
+    json_file = json.load(js)
+
 
 def calculate_balls(sex, exercise, result):
-    with open('exercises_balls.json', 'r') as js:
-        balls = json.load(js)
-    ind = balls[sex][0].index(exercise)
-    for i in balls[sex]:
+    ind = json_file[sex][0].index(exercise)
+    for i in json_file[sex]:
         if i[ind] == result:
             return i[0]
 
 
-def shows_the_remaining_exercises(balls, stat, sex):
-    pass
+def shows_the_remaining_exercises(balls, age, sex):
+    balls_needs = int(json_file['sport_test_normativ'][sex][age][2]) - int(balls)
+    return balls_needs
 
 
 class Container(BoxLayout):
@@ -53,6 +55,7 @@ class Container(BoxLayout):
     def view_result(self):
         try:
             self.rez.text = f"Вы набрали\n [color=ff3333]       {calculate_balls(data['sex'], data['exercise'], data['result'])}\n[/color] [color=3333ff][/color]    баллов"
+            self.rez_2.text = f"Вым еще необходимо:\n [color=ff3333] {shows_the_remaining_exercises(calculate_balls(data['sex'], data['exercise'], data['result']), data['age'], data['sex'])} [/color] баллов"
         except ValueError:
             self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
         print(data)
