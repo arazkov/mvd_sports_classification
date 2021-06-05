@@ -24,9 +24,32 @@ def calculate_balls(sex, exercise, result):
             return i[0]
 
 
-def shows_the_remaining_exercises(balls, age, sex):
+def calculate_balls_needs(balls, age, sex):
     balls_needs = int(json_file['sport_test_normativ'][sex][age][2]) - int(balls)
     return balls_needs
+
+def shows_the_remaining_exercises(balls_needs):
+    if balls_needs <= 0:
+        exercise_needs_text = 'ПОЗДРАВЛЯЕМ!'
+    elif data['exercise'] == 'run_10_10':
+        if data['sex'] == 'man':
+            for i in json_file['man']:
+                if i[0] == str(balls_needs):
+                    exercise_needs_text = f"Отжимания {i[2]}\n Подтягиваня {i[1]}\n Гиря {i[3]}"
+        else:
+            for i in json_file['women']:
+                if i[0] == str(balls_needs):
+                    exercise_needs_text = f"Отжимания {i[1]}\n Пресс {i[2]}"
+    else:
+        if data['sex'] == 'man':
+            for i in json_file['man']:
+                if i[0] == str(balls_needs):
+                    exercise_needs_text = f"Пробежать 10 по 10 за {i[4]}"
+        else:
+            for i in json_file['women']:
+                if i[0] == str(balls_needs):
+                    exercise_needs_text = f"Пробежать 10 по 10 за {i[3]}"
+    return exercise_needs_text
 
 
 class Container(BoxLayout):
@@ -54,8 +77,10 @@ class Container(BoxLayout):
 
     def view_result(self):
         try:
-            self.rez.text = f"Вы набрали\n [color=ff3333]       {calculate_balls(data['sex'], data['exercise'], data['result'])}\n[/color] [color=3333ff][/color]    баллов"
-            self.rez_2.text = f"Вым еще необходимо:\n [color=ff3333] {shows_the_remaining_exercises(calculate_balls(data['sex'], data['exercise'], data['result']), data['age'], data['sex'])} [/color] баллов"
+            balls_rez = calculate_balls(data['sex'], data['exercise'], data['result'])
+            balls_needs_rez = calculate_balls_needs(balls_rez,  data['age'], data['sex'])
+            self.rez.text = f"Вы набрали\n [color=ff3333]       {balls_rez}\n[/color] [color=3333ff][/color]    баллов"
+            self.rez_2.text = f"Вым еще необходимо:\n [color=ff3333] {balls_needs_rez} [/color] баллов\n{shows_the_remaining_exercises(balls_needs_rez)}"
         except ValueError:
             self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
         print(data)
