@@ -28,6 +28,7 @@ def calculate_balls_needs(balls, age, sex):
     balls_needs = int(json_file['sport_test_normativ'][sex][age][2]) - int(balls)
     return balls_needs
 
+
 def shows_the_remaining_exercises(balls_needs):
     if balls_needs <= 0:
         exercise_needs_text = 'ПОЗДРАВЛЯЕМ!'
@@ -56,37 +57,41 @@ class Container(BoxLayout):
     def select_params_to_view(self):
         exercise_list = ["Бег", "Отжимания", "Подтягивания", "Гиря"]
         age_list = [
-                'до 25 лет',
-                'от 25 до 30 лет',
-                'от 30 до 35 лет',
-                'от 35 до 40 лет',
-                'от 40 до 45 лет',
-                'от 45 до 50 лет',
-                'от 50 до 55 лет',
-                '55 лет и старше']
+            'до 25 лет',
+            'от 25 до 30 лет',
+            'от 30 до 35 лет',
+            'от 35 до 40 лет',
+            'от 40 до 45 лет',
+            'от 45 до 50 лет',
+            'от 50 до 55 лет',
+            '55 лет и старше']
+
         if data['sex'] == 'man':
             self.exer.values = exercise_list
             self.age.values = age_list
         elif data['sex'] == 'women':
             self.exer.values = exercise_list[:2] + ["Прес"]
             self.age.values = age_list[:5] + ['45 лет и старше']
-        if data['exercise'] == 'run_10_10':
-            self.ti.input_filter = 'float'
-        else:
-            self.ti.input_filter = 'int'
+        if data['sex'] and data['exercise']:
+            try:
+                exercise_ind = json_file[data['sex']][0].index(data['exercise'])
+                self.ti.values = [i[exercise_ind] for i in json_file[data['sex']][1:] if i[exercise_ind] != '\u2013']
+            except ValueError:
+                self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
 
     def view_result(self):
         try:
             balls_rez = calculate_balls(data['sex'], data['exercise'], data['result'])
-            balls_needs_rez = calculate_balls_needs(balls_rez,  data['age'], data['sex'])
+            balls_needs_rez = calculate_balls_needs(balls_rez, data['age'], data['sex'])
             self.rez.text = f"Вы набрали\n [color=ff3333]       {balls_rez}\n[/color] [color=3333ff][/color]    баллов"
-            self.rez_2.text = f"Вым еще необходимо:\n [color=ff3333] {balls_needs_rez} [/color] баллов\n{shows_the_remaining_exercises(balls_needs_rez)}"
-        except ValueError:
+            self.rez_2.text = f"Вым еще необходимо:\n         [color=ff3333] {balls_needs_rez} [/color] баллов\n{shows_the_remaining_exercises(balls_needs_rez)}"
+        except:
             self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
-        print(data)
+
 
     def qw(self, param):
         data.update(param)
+        print(data)
         self.select_params_to_view()
         if all([data['stat'], data['sex'], data['age'], data['exercise'], data['result']]):
             self.view_result()
