@@ -96,7 +96,9 @@ class Container(BoxLayout):
             balls_rez = calculate_balls(data['sex'], data['exercise'], data['result'])
             balls_needs_rez = calculate_balls_needs(balls_rez, data['age'], data['sex'])
             self.rez.text = f"Вы набрали\n [color=ff3333]       {balls_rez}\n[/color] [color=3333ff][/color]    баллов"
-            self.rez_2.text = f"Вым еще необходимо:\n         [color=ff3333] {balls_needs_rez} [/color] баллов\n{shows_the_remaining_exercises(balls_needs_rez)}"
+            self.rez_2.text = f"Вым еще необходимо:\n         " \
+                              f"[color=ff3333] {balls_needs_rez} [/color] баллов\n" \
+                              f"{shows_the_remaining_exercises(balls_needs_rez)} "
         except:
             self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
 
