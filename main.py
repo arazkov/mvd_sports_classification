@@ -29,18 +29,30 @@ def calculate_balls_needs(balls, age, sex):
     return balls_needs
 
 
+def find_exercise_need(balls_needs, exercise, sex):
+    for i in range(1, len(json_file[sex])):
+        if json_file[sex][i][0] == str(balls_needs):
+            exercise_need = json_file[sex][i][json_file[sex][0].index(exercise)]
+            while exercise_need == '\u2013':
+                i -= 1
+                exercise_need = json_file[sex][i][json_file[sex][0].index(exercise)]
+            # print(exercise_need)
+            return exercise_need
+
+
 def shows_the_remaining_exercises(balls_needs):
     if balls_needs <= 0:
         exercise_needs_text = 'ПОЗДРАВЛЯЕМ!'
     elif data['exercise'] == 'run_10_10':
         if data['sex'] == 'man':
-            for i in json_file['man']:
-                if i[0] == str(balls_needs):
-                    exercise_needs_text = f"Отжимания {i[2]}\n Подтягиваня {i[1]}\n Гиря {i[3]}"
+            push_ups_need = find_exercise_need(balls_needs, 'push_ups', 'man')
+            pull_ups_need = find_exercise_need(balls_needs, 'pull_ups', 'man')
+            crying_need = find_exercise_need(balls_needs, 'crying', 'man')
+            exercise_needs_text = f"Отжимания {push_ups_need}\n Подтягиваня {pull_ups_need}\n Гиря {crying_need}"
         else:
-            for i in json_file['women']:
-                if i[0] == str(balls_needs):
-                    exercise_needs_text = f"Отжимания {i[1]}\n Пресс {i[2]}"
+            push_ups_need = find_exercise_need(balls_needs, 'push_ups', 'women')
+            press_need = find_exercise_need(balls_needs, 'press', 'women')
+            exercise_needs_text = f"Отжимания {push_ups_need}\n Пресс {press_need}"
     else:
         if data['sex'] == 'man':
             for i in json_file['man']:
@@ -88,10 +100,8 @@ class Container(BoxLayout):
         except:
             self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
 
-
     def qw(self, param):
         data.update(param)
-        print(data)
         self.select_params_to_view()
         if all([data['stat'], data['sex'], data['age'], data['exercise'], data['result']]):
             self.view_result()
