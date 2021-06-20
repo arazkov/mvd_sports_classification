@@ -76,7 +76,8 @@
             id: age
             text: "Возраст"
             size_hint_y: None
-            size: (110, 40)
+            height: '48dp'
+#            size: (110, 40)
             on_text:
                 self.age = '25-' if self.text == "до 25 лет" else '25_30' if self.text == "от 25 до 30 лет" else '30_35' if self.text == "от 30 до 35 лет" else '35_40' if self.text == "от 35 до 40 лет" else '40_45' if self.text == "от 40 до 45 лет" else '45+' if self.text == "45 лет и старше" else '45_50' if self.text == "от 45 до 50 лет" else '50_55' if self.text == "от 50 до 55 лет" else '55+' if self.text == "55 лет и старше" else ''
                 root.qw({'age': self.age})
@@ -94,7 +95,8 @@
             id: exer
             text: "Упражнение"
             size_hint_y: None
-            size: (110, 40)
+            height: '48dp'
+#            size: (110, 40)
             on_text:
                 self.exercise = 'run_10_10' if self.text == "Бег" else 'push_ups' if self.text == "Отжимания" else 'pull_ups' if self.text == "Подтягивания" else 'crying' if self.text == "Гиря" else 'press' if self.text == "Прес" else ''
                 root.qw({'exercise': self.exercise})
@@ -103,13 +105,15 @@
             id: ti
             text: "Результат"
             size_hint_y: None
-            size: (110, 40)
+            height: '48dp'
+#            size: (110, 40)
             on_text:
                 root.qw({'result': self.text})
 
     Label:
         id: rez
         font_size: '28sp'
+        halign: 'center'
         text: "Укажите все параметры"
         markup: True
         size_hint_y: 0.3
@@ -117,6 +121,8 @@
     Label:
         id: rez_2
         font_size: '28sp'
+        halign: 'center'
+#        valign: 'middle'
 #        text: 'Вым еще необходимо:\n [color=3333ff]отжатся[color=ff3333] 50[/color][/color] раз или\n [color=3333ff]подтянутся [color=ff3333]15 [/color][/color] раз'
         markup: True
         size_hint_y: 0.3

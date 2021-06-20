@@ -17,6 +17,18 @@ with open('exercises_balls.json', 'r') as js:
     json_file = json.load(js)
 
 
+def choose_plural(nam):
+    var = ['бал', 'бала', 'балов']
+    n = nam % 10
+    n2 = nam % 100
+    if nam in range(21, 100000, 10) and n2 != 11 or nam == 1:
+        return var[0]
+    elif n in range(2, 5) and nam not in range(5, 21) and n2 not in range(12, 15):
+        return var[1]
+    else:
+        return var[2]
+
+
 def calculate_balls(sex, exercise, result):
     ind = json_file[sex][0].index(exercise)
     for i in json_file[sex]:
@@ -41,27 +53,25 @@ def find_exercise_need(balls_needs, exercise, sex):
 
 
 def shows_the_remaining_exercises(balls_needs):
-    if balls_needs <= 0:
-        exercise_needs_text = 'ПОЗДРАВЛЯЕМ!'
-    elif data['exercise'] == 'run_10_10':
+    if data['exercise'] == 'run_10_10':
         if data['sex'] == 'man':
             push_ups_need = find_exercise_need(balls_needs, 'push_ups', 'man')
             pull_ups_need = find_exercise_need(balls_needs, 'pull_ups', 'man')
             crying_need = find_exercise_need(balls_needs, 'crying', 'man')
-            exercise_needs_text = f"Отжимания {push_ups_need}\n Подтягиваня {pull_ups_need}\n Гиря {crying_need}"
+            exercise_needs_text = f"[color=#9ACD32]Отжимания:[/color] {push_ups_need}\n" \
+                                  f"[color=#9ACD32]Подтягивания:[/color] {pull_ups_need}\n" \
+                                  f"[color=#9ACD32]Гиря:[/color] {crying_need}"
         else:
             push_ups_need = find_exercise_need(balls_needs, 'push_ups', 'women')
             press_need = find_exercise_need(balls_needs, 'press', 'women')
-            exercise_needs_text = f"Отжимания {push_ups_need}\n Пресс {press_need}"
+            exercise_needs_text = f"[color=#9ACD32]Отжимания:[/color] {push_ups_need}\n" \
+                                  f"[color=#9ACD32]Пресс:[/color] {press_need}"
     else:
         if data['sex'] == 'man':
-            for i in json_file['man']:
-                if i[0] == str(balls_needs):
-                    exercise_needs_text = f"Пробежать 10 по 10 за {i[4]}"
+            run_need = find_exercise_need(balls_needs, 'run_10_10', 'man')
         else:
-            for i in json_file['women']:
-                if i[0] == str(balls_needs):
-                    exercise_needs_text = f"Пробежать 10 по 10 за {i[3]}"
+            run_need = find_exercise_need(balls_needs, 'run_10_10', 'women')
+        exercise_needs_text = f"[color=#9ACD32]Пробежать 10 по 10 за[/color]: {run_need}"
     return exercise_needs_text
 
 
@@ -85,22 +95,33 @@ class Container(BoxLayout):
             self.exer.values = exercise_list[:2] + ["Прес"]
             self.age.values = age_list[:5] + ['45 лет и старше']
         if data['sex'] and data['exercise']:
-            try:
-                exercise_ind = json_file[data['sex']][0].index(data['exercise'])
-                self.ti.values = [i[exercise_ind] for i in json_file[data['sex']][1:] if i[exercise_ind] != '\u2013']
-            except ValueError:
-                self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
+            exercise_ind = json_file[data['sex']][0].index(data['exercise'])
+            self.ti.values = [i[exercise_ind] for i in json_file[data['sex']][1:] if i[exercise_ind] != '\u2013']
 
     def view_result(self):
         try:
             balls_rez = calculate_balls(data['sex'], data['exercise'], data['result'])
             balls_needs_rez = calculate_balls_needs(balls_rez, data['age'], data['sex'])
-            self.rez.text = f"Вы набрали\n [color=ff3333]       {balls_rez}\n[/color] [color=3333ff][/color]    баллов"
-            self.rez_2.text = f"Вым еще необходимо:\n         " \
-                              f"[color=ff3333] {balls_needs_rez} [/color] баллов\n" \
-                              f"{shows_the_remaining_exercises(balls_needs_rez)} "
-        except:
-            self.rez.text = 'ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ!'
+            if balls_needs_rez <= 0:
+                balls_norm = json_file['sport_test_normativ'][data['sex']][data['age']][2]
+                self.rez.text = f'[color=#32CD32]ПОЗДРАВЛЯЕМ!\n[/color]' \
+                                f'Вы набрали\n' \
+                                f'[color=ff3333]{balls_rez}[/color]\n' \
+                                f'{choose_plural(int(balls_rez))}'
+                self.rez_2.text = f'Вам необходимо набрать\n' \
+                                  f'[color=ff3333]{balls_norm}[/color]\n' \
+                                  f'{choose_plural(int(balls_norm))}'
+            else:
+                self.rez.text = f"Вы набрали\n" \
+                                f"[color=ff3333]{balls_rez}[/color]\n" \
+                                f"{choose_plural(int(balls_rez))}"
+                self.rez_2.text = f"Вым еще необходимо:\n" \
+                                  f"[color=ff3333] {balls_needs_rez} [/color] {choose_plural(int(balls_needs_rez))}\n" \
+                                  f"[color=3333ff] Упражнения:[/color] \n" \
+                                  f"{shows_the_remaining_exercises(balls_needs_rez)}"
+        except (ValueError, TypeError, KeyError):
+            self.rez.text = '[color=ff3333]ВВЕДИТЕ КОРЕКТНЫЕ ДАННЫЕ![/color]'
+            self.rez_2.text = ''
 
     def qw(self, param):
         data.update(param)
