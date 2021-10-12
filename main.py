@@ -95,8 +95,12 @@ class Container(BoxLayout):
             self.exer.values = exercise_list[:2] + ["Прес"]
             self.age.values = age_list[:5] + ['45 лет и старше']
         if data['sex'] and data['exercise']:
-            exercise_ind = json_file[data['sex']][0].index(data['exercise'])
-            self.ti.values = [i[exercise_ind] for i in json_file[data['sex']][1:] if i[exercise_ind] != '\u2013']
+            try:
+                exercise_ind = json_file[data['sex']][0].index(data['exercise'])
+                self.ti.values = [i[exercise_ind] for i in json_file[data['sex']][1:] if i[exercise_ind] != '\u2013']
+            except:
+                pass
+
 
     def view_result(self):
         try:
